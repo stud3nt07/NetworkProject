@@ -43,37 +43,28 @@ En las empresas se valora más la documentación que la configuración misma.
 
 ---
 
-> ### 💡 El consejo de oro: "Rompe cosas"
+## 5. El consejo de oro: "Rompe cosas"
 > En los cursos todo sale bien a la primera. En la práctica, lo que te da experiencia real es cuando algo **no funciona**. Si un "ping" no llega, usa `traceroute`, revisa las tablas de ruteo, analiza los logs del firewall y usa Wireshark. Ahí es donde realmente aprenderás cómo funcionan los protocolos.
 
+### Consejos adicionales:
+*   **Wireshark desde el día 1:** Captura tráfico mientras configuras cada protocolo — ver el handshake de OSPF o el three-way handshake de BGP en tiempo real te graba los conceptos de otra forma.
+*   **Escenario de falla simulada:** Apaga un enlace a propósito, rompe una ruta, introduce un loop — y practica recuperarlo bajo "presión".
+
 ---
-
-**¿Te gustaría que te ayude a diseñar un escenario específico de laboratorio, por ejemplo, cómo conectar un Firewall Fortinet virtual a una red interna en EVE-NG?**
-
-
-
-Wireshark desde el día 1, no al final. Captura tráfico mientras configuras cada protocolo — ver el handshake de OSPF o el three-way handshake de BGP en tiempo real te graba los conceptos de otra forma.
-Un escenario de falla simulada: apaga un enlace a propósito, rompe una ruta, introduce un loop — y practica recuperarlo bajo "presión".
-Para tu perfil con Linux/CachyOS, añadiría FRRouting como opción: es un stack de routing real (BGP, OSPF, IS-IS) que corre nativamente en Linux, ideal para integrar VMs al lab.
-
-
-
 
 # Laboratorios de Redes en Linux (Fedora & CachyOS)
 
 Tanto Fedora como CachyOS son plataformas de élite para networking porque usan kernels modernos y excelente soporte para **KVM/QEMU**. Aquí te detallo dónde y cómo virtualizar:
 
----
+Para tu perfil con Linux/CachyOS, **FRRouting** es una excelente opción: es un stack de routing real (BGP, OSPF, IS-IS) que corre nativamente en Linux, ideal para integrar VMs al lab.
 
-### 1. ¿Gnome Boxes? (Para Servidores y Endpoints)
+## 1. ¿Gnome Boxes? (Para Servidores y Endpoints)
 **Gnome Boxes** es excelente por su simplicidad, pero tiene una limitación crítica para redes avanzadas: **no permite gestionar topologías complejas ni puentes (bridges) de forma granular fácilmente.**
 
 * **Úsalo para:** Levantar rápidamente una instancia de Ubuntu Server, Fedora Server o un Windows de prueba para testear conectividad.
 * **Limitación:** Es difícil conectar un router virtual de Boxes con un switch virtual de otra app.
 
----
-
-### 2. Virtual Machine Manager (Virt-Manager) - El "Must Have"
+## 2. Virtual Machine Manager (Virt-Manager) - El "Must Have"
 Si quieres control real sin complicaciones excesivas, **Virt-Manager** es la herramienta profesional sobre la que corre Boxes.
 
 * **Por qué usarlo:** Te permite crear redes virtuales aisladas, configurar interfaces en modo "Bridge" y usar el controlador `virtio` para máximo rendimiento.
@@ -82,29 +73,25 @@ Si quieres control real sin complicaciones excesivas, **Virt-Manager** es la her
     * **CachyOS:** `sudo pacman -S virt-manager qemu-desktop libvirt dnsmasq iptables-nft`
 * **Caso de uso:** Instalar un **FortiGate VM** o un **pfsense** y conectarlo a otras VMs de forma manual.
 
----
-
-### 3. GNS3 o EVE-NG (El "End-Game" para Redes)
+## 3. GNS3 o EVE-NG (El "End-Game" para Redes)
 Para practicar protocolos (OSPF, BGP, MPLS) y firewalls de Cisco/Fortinet, **no virtualices manualmente en Boxes**. Usa un orquestador de topologías.
 
-#### A. GNS3 (Nativo en Linux)
+### A. GNS3 (Nativo en Linux)
 Es la mejor opción para Fedora/CachyOS porque corre de forma nativa.
 * **Cómo funciona:** GNS3 levanta las imágenes de los routers/firewalls usando QEMU en el backend.
 * **Ventaja:** Puedes arrastrar un cable de un router Cisco a un Firewall Fortinet y ver los paquetes en **Wireshark** en tiempo real haciendo clic derecho en el cable.
 
-#### B. EVE-NG (Vía Navegador)
+### B. EVE-NG (Vía Navegador)
 Muchos profesionales prefieren EVE-NG. En Linux, lo ideal es instalar EVE-NG dentro de una VM en Virt-Manager y acceder a la interfaz de diseño desde Firefox.
 
----
-
-### 4. Contenedores: El futuro (Containerlab)
+## 4. Contenedores: El futuro (Containerlab)
 Como usuario de Fedora/Arch, deberías echarle un ojo a **Containerlab**.
 * En lugar de virtualizar routers pesados, levanta routers basados en contenedores (como Arista, Nokia o incluso Cisco 8000V).
 * Es puramente mediante archivos YAML. Es lo que se usa hoy en día para **NetDevOps**.
 
 ---
 
-### Resumen de Herramientas según tu SO
+## Resumen de Herramientas según tu SO
 
 | Herramienta | Uso Ideal | Compatibilidad |
 | :--- | :--- | :--- |
@@ -115,9 +102,7 @@ Como usuario de Fedora/Arch, deberías echarle un ojo a **Containerlab**.
 
 ---
 
-### 🛠️ Próximo paso recomendado
+## 🛠️ Próximo paso recomendado
 Dado que estás en Fedora/CachyOS, mi recomendación es:
 1.  Instala **Virt-Manager** para tus servidores base.
 2.  Instala **GNS3** para tus laboratorios de protocolos y Fortinet.
-
-**¿Te gustaría que te pase los comandos específicos para configurar el Bridge de red en Fedora y que tus VMs tengan salida real a internet?**
