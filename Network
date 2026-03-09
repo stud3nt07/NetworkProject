@@ -1,108 +1,83 @@
-# Ruta Práctica: Del Curso a la Ingeniería de Redes Real
+# 🌐 Ruta Práctica: Del Curso a la Ingeniería de Redes Real
 
-Es genial que ya tengas esa base teórica sólida. El "salto" de los cursos a la vida real suele ser el muro donde muchos se frenan, pero la buena noticia es que hoy en día puedes montar un centro de datos entero en tu propia computadora.
+![Network Engineering](https://img.shields.io/badge/Career-Networking-blue?style=for-the-badge&logo=cisco)
+![Linux](https://img.shields.io/badge/OS-Fedora%20%7C%20CachyOS-informational?style=for-the-badge&logo=linux)
+![Lab](https://img.shields.io/badge/Environment-HomeLab-orange?style=for-the-badge&logo=homeassistant)
 
-Para dejar de ser un "estudiante de cursos" y convertirte en un implementador, necesitas ensuciarte las manos con **laboratorios de topología libre** y **proyectos de servicios**.
+Este repositorio contiene una hoja de ruta técnica para cerrar la brecha entre la teoría de los cursos (CCNA/Fortinet) y la implementación profesional en entornos reales.
 
 ---
 
-## 1. El Laboratorio de Infraestructura (Networking)
-No te limites a **Packet Tracer**; es un simulador muy básico que no maneja tráfico real. Para nivel profesional, necesitas **emuladores** que corran los sistemas operativos reales de los equipos.
+## 📑 Tabla de Contenidos
+* [1. El Laboratorio de Infraestructura](#1-el-laboratorio-de-infraestructura)
+* [2. Virtualización y Servidores](#2-virtualización-y-servidores)
+* [3. Proyectos "Real-World" para tu CV](#3-proyectos-real-world-para-tu-cv)
+* [4. Documentación y Visibilidad](#4-documentación-y-visibilidad)
+* [5. Guía para Usuarios de Linux (Fedora & CachyOS)](#5-guía-para-usuarios-de-linux)
 
-* **GNS3 o EVE-NG:** Son el estándar de la industria. Aquí puedes cargar imágenes reales (binarios) de Cisco (IOS), Fortinet (FortiGate), Juniper y Checkpoint.
-* **Qué hacer:** No solo conectes rutas. Configura una **VPN Site-to-Site** entre un firewall Fortinet y un router Cisco, o levanta un protocolo **BGP** simulando dos proveedores de internet (ISPs).
+---
+
+## 1. El Laboratorio de Infraestructura
+No te limites a **Packet Tracer**; es un simulador básico. Para nivel profesional, necesitas **emuladores** que ejecuten sistemas operativos reales.
+
+* **GNS3 o EVE-NG:** El estándar de la industria. Permiten cargar imágenes reales (binarios) de Cisco (IOS), Fortinet (FortiGate), Juniper y Checkpoint.
+* **El Reto:** Configura una **VPN Site-to-Site** entre un firewall Fortinet y un router Cisco, o levanta **BGP** simulando dos proveedores de internet (ISPs).
+
+
 
 ---
 
 ## 2. Virtualización y Servidores
-Un experto en redes que no sabe de servidores está incompleto. El tráfico de red siempre tiene un origen y un destino (servidores).
+Un experto en redes debe entender el origen y destino del tráfico: los servidores.
 
-* **Proxmox o VMware ESXi:** Instala un hipervisor en una PC que tengas libre o usa VMware Workstation en tu PC principal.
-* **El Reto:** Crea una red segmentada por **VLANs**. Pon un servidor Windows (Active Directory) en una VLAN y un servidor Linux (Web Server) en otra. Configura las reglas de firewall para que solo el tráfico necesario (puertos 80/443/53) pase entre ellos.
+* **Hipervisores:** Instala **Proxmox** o **VMware ESXi** en una PC dedicada, o usa **Virt-Manager** (KVM/QEMU) en Linux.
+* **El Proyecto:** Crea una red segmentada por **VLANs**:
+    * **VLAN 10 (Gestión):** Acceso a equipos de red.
+    * **VLAN 20 (Servicios):** Windows Server (Active Directory) y Linux (Web Server).
+    * **Configuración:** Aplica reglas de firewall para permitir solo tráfico esencial (puertos 80, 443, 53).
 
 ---
 
 ## 3. Proyectos "Real-World" para tu CV
-Si quieres impresionar en una entrevista, no digas "hice el curso de Cisco", di "monté esta infraestructura":
+Diferénciate en las entrevistas mostrando implementaciones tangibles en lugar de solo certificados:
 
-| Proyecto | Lo que aprendes |
-| :--- | :--- |
-| **Home Lab con OPNSense/pfsense** | Firewalling real, IDS/IPS, y filtrado de contenido. |
-| **Monitoreo con Zabbix o Grafana** | Protocolo SNMP, alertas y salud de la red. |
-| **Networking en la Nube (AWS/Azure)** | Creación de VPCs, Subnets, Gateways y Peering. |
-| **Automatización con Ansible** | Configurar 10 routers al mismo tiempo con un solo script de Python/YAML. |
+| Proyecto | Stack Tecnológico | Lo que aprendes |
+| :--- | :--- | :--- |
+| **Home Lab Firewall** | OPNSense / pfSense | Firewalling, IDS/IPS, filtrado de contenido. |
+| **Monitoreo Proactivo** | Zabbix / Grafana | Protocolo SNMP, alertas y Dashboards. |
+| **Cloud Networking** | AWS / Azure | VPCs, Subnets, Gateways y Peering. |
+| **NetDevOps** | Ansible / Python | Automatización de configuraciones masivas. |
 
 ---
 
 ## 4. Documentación y Visibilidad
-En las empresas se valora más la documentación que la configuración misma.
+En el mundo corporativo, **si no está documentado, no existe**.
 
-1.  **Diagramas Pro:** Usa **Draw.io** o **Lucidchart** para hacer diagramas impecables (L2 y L3).
-2.  **GitHub:** Sube tus archivos de configuración (.conf) y tus topologías. Esto sirve como un portafolio técnico ante reclutadores.
-3.  **Wireshark:** No asumas que los datos viajan; ¡míralos! Aprender a leer una captura de tráfico (`.pcap`) te separa del 90% de los técnicos básicos.
+1.  **Diagramas Pro:** Usa **Draw.io** o **Lucidchart** para crear topologías L2 y L3 impecables.
+2.  **Portfolio en GitHub:** Sube tus archivos `.conf`, scripts de Ansible y archivos de topología YAML.
+3.  **Wireshark desde el Día 1:** Captura el *three-way handshake* de BGP o el saludo de OSPF para entender el protocolo a nivel de bits.
 
----
-
-## 5. El consejo de oro: "Rompe cosas"
-> En los cursos todo sale bien a la primera. En la práctica, lo que te da experiencia real es cuando algo **no funciona**. Si un "ping" no llega, usa `traceroute`, revisa las tablas de ruteo, analiza los logs del firewall y usa Wireshark. Ahí es donde realmente aprenderás cómo funcionan los protocolos.
-
-### Consejos adicionales:
-*   **Wireshark desde el día 1:** Captura tráfico mientras configuras cada protocolo — ver el handshake de OSPF o el three-way handshake de BGP en tiempo real te graba los conceptos de otra forma.
-*   **Escenario de falla simulada:** Apaga un enlace a propósito, rompe una ruta, introduce un loop — y practica recuperarlo bajo "presión".
+> [!TIP]
+> **Consejo de oro: "Rompe cosas".**
+> La verdadera experiencia nace del troubleshooting. Si un "ping" no llega, usa `traceroute`, revisa tablas de ruteo y analiza logs del firewall.
 
 ---
 
-# Laboratorios de Redes en Linux (Fedora & CachyOS)
+## 5. Guía para Usuarios de Linux (Fedora & CachyOS)
+Aprovecha que usas sistemas basados en el Kernel Linux para obtener rendimiento nativo en virtualización.
 
-Tanto Fedora como CachyOS son plataformas de élite para networking porque usan kernels modernos y excelente soporte para **KVM/QEMU**. Aquí te detallo dónde y cómo virtualizar:
+### Herramientas Recomendadas
+* **Virt-Manager:** Superior a Gnome Boxes para redes. Permite gestión granular de interfaces *Bridge*.
+* **GNS3:** Corre de forma nativa. Ideal para integrar Wireshark directamente sobre los enlaces virtuales.
+* **Containerlab:** La herramienta moderna para levantar routers basados en contenedores (Arista, Nokia) mediante YAML.
 
-Para tu perfil con Linux/CachyOS, **FRRouting** es una excelente opción: es un stack de routing real (BGP, OSPF, IS-IS) que corre nativamente en Linux, ideal para integrar VMs al lab.
-
-## 1. ¿Gnome Boxes? (Para Servidores y Endpoints)
-**Gnome Boxes** es excelente por su simplicidad, pero tiene una limitación crítica para redes avanzadas: **no permite gestionar topologías complejas ni puentes (bridges) de forma granular fácilmente.**
-
-* **Úsalo para:** Levantar rápidamente una instancia de Ubuntu Server, Fedora Server o un Windows de prueba para testear conectividad.
-* **Limitación:** Es difícil conectar un router virtual de Boxes con un switch virtual de otra app.
-
-## 2. Virtual Machine Manager (Virt-Manager) - El "Must Have"
-Si quieres control real sin complicaciones excesivas, **Virt-Manager** es la herramienta profesional sobre la que corre Boxes.
-
-* **Por qué usarlo:** Te permite crear redes virtuales aisladas, configurar interfaces en modo "Bridge" y usar el controlador `virtio` para máximo rendimiento.
-* **Instalación:**
-    * **Fedora:** `sudo dnf install virt-manager`
-    * **CachyOS:** `sudo pacman -S virt-manager qemu-desktop libvirt dnsmasq iptables-nft`
-* **Caso de uso:** Instalar un **FortiGate VM** o un **pfsense** y conectarlo a otras VMs de forma manual.
-
-## 3. GNS3 o EVE-NG (El "End-Game" para Redes)
-Para practicar protocolos (OSPF, BGP, MPLS) y firewalls de Cisco/Fortinet, **no virtualices manualmente en Boxes**. Usa un orquestador de topologías.
-
-### A. GNS3 (Nativo en Linux)
-Es la mejor opción para Fedora/CachyOS porque corre de forma nativa.
-* **Cómo funciona:** GNS3 levanta las imágenes de los routers/firewalls usando QEMU en el backend.
-* **Ventaja:** Puedes arrastrar un cable de un router Cisco a un Firewall Fortinet y ver los paquetes en **Wireshark** en tiempo real haciendo clic derecho en el cable.
-
-### B. EVE-NG (Vía Navegador)
-Muchos profesionales prefieren EVE-NG. En Linux, lo ideal es instalar EVE-NG dentro de una VM en Virt-Manager y acceder a la interfaz de diseño desde Firefox.
-
-## 4. Contenedores: El futuro (Containerlab)
-Como usuario de Fedora/Arch, deberías echarle un ojo a **Containerlab**.
-* En lugar de virtualizar routers pesados, levanta routers basados en contenedores (como Arista, Nokia o incluso Cisco 8000V).
-* Es puramente mediante archivos YAML. Es lo que se usa hoy en día para **NetDevOps**.
-
----
-
-## Resumen de Herramientas según tu SO
-
-| Herramienta | Uso Ideal | Compatibilidad |
+### Resumen de Compatibilidad
+| Herramienta | Uso Ideal | Comando de Instalación (Fedora) |
 | :--- | :--- | :--- |
-| **Virt-Manager** | Servidores (AD, Linux, Monitoring) | Nativo (KVM/QEMU) |
-| **GNS3** | Topologías complejas (Cisco, Fortinet) | Excelente en Fedora/Cachy |
-| **Wireshark** | Análisis de protocolos | Indispensable (Instalar vía Repo) |
-| **Podman / Docker** | Microservicios y NetDevOps | Nativo (Fedora usa Podman) |
+| **Virt-Manager** | Servidores y AD | `sudo dnf install virt-manager` |
+| **Wireshark** | Análisis de Red | `sudo dnf install wireshark` |
+| **GNS3** | Topologías Complejas | `sudo dnf install gns3-server gns3-gui` |
 
 ---
 
-## 🛠️ Próximo paso recomendado
-Dado que estás en Fedora/CachyOS, mi recomendación es:
-1.  Instala **Virt-Manager** para tus servidores base.
-2.  Instala **GNS3** para tus laboratorios de protocolos y Fortinet.
+**¿Te gustaría que añadamos una sección sobre cómo configurar un Bridge de red en Linux para que tus máquinas virtuales tengan salida real a internet?**
